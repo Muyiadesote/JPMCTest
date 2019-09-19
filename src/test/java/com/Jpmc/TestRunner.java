@@ -1,20 +1,20 @@
 package com.Jpmc;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import org.junit.runner.RunWith;
-
-
-@RunWith(Cucumber.class)
-@CucumberOptions(plugin = {"pretty",
-        "html: target/test-report/report-html",
-        "json: target/test-report/report/report-json.json",
-        "junit: target/test-report/report-xml.xml",},
-        features = {"src/test/resources"})
+import org.testng.annotations.Test;
+import cucumber.api.testng.TestNGCucumberRunner;
 
 
 
+@CucumberOptions(
+        features="src/test/resources/Features/verifyNews.feature",
+        glue="com.Jpmc.Step_definition")
 public class TestRunner {
+
+    @Test
+    public void runCukes() {
+
+        new TestNGCucumberRunner(getClass()).runCukes();
+
+    }
 }
-
-

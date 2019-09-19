@@ -1,0 +1,1 @@
+INFO    2019-09-19 01:21:30,033 [main] com.Jpmc.Step_definition.BaseSteps  - Config properties file loaded

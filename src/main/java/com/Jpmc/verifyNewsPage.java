@@ -1,34 +1,26 @@
 package com.Jpmc;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 
 import java.io.IOException;
 
 
 import java.nio.file.Paths;
-
 import java.util.List;
 import java.util.Scanner;
-
+import java.util.concurrent.TimeUnit;
 import static java.nio.file.Files.*;
 
 
-public class verifyNewsPage {
-
-    WebDriver driver;
-
-    public verifyNewsPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-
-    }
+public class verifyNewsPage extends BasePage {
 
     // Web Elements
 
@@ -49,16 +41,33 @@ public class verifyNewsPage {
     @FindBy(xpath = "//h1")
     private WebElement headLineMessage;
 
-    @FindBy(css = "#tsf > div:nth-child(2) > div > div.RNNXgb > div > div.a4bIc > input")
+    @FindBy(xpath = "//INPUT[@class='gLFyf gsfi']/self::INPUT")
     private WebElement searchField;
 
-    @FindBy(css = "#tsf > div:nth-child(2) > div > div.FPdoLc.VlcLAe > center > input.gNO89b")
+    @FindBy(xpath = "//INPUT[@name='btnK']")
     private WebElement clickSearchBtn;
 
     // To get the list of all the headers with the headlines
     @FindAll(@FindBy(xpath = "//h3"))   //id = "resultStats"
     private List <WebElement> result;
 
+    public verifyNewsPage open(String url) {
+
+        DriverManager.getDriver().navigate().to(url);
+        return (verifyNewsPage) openPage(verifyNewsPage.class);
+    }
+
+    public void waitUntilElementIsClickable(WebElement element) {
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(10, TimeUnit.SECONDS)
+                .pollingEvery(1, TimeUnit.SECONDS)
+                .ignoring(StaleElementReferenceException.class, NoSuchElementException.class);
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable((element)));
+        } catch (org.openqa.selenium.TimeoutException e) {
+            System.out.println("Expected element not available: " + element);
+        }
+    }
 
     public void clickCookie() {
         closeCookie.click();
@@ -71,8 +80,7 @@ public class verifyNewsPage {
     }
 
     public void clickHeadlineNews() {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-        wait.until(ExpectedConditions.elementToBeClickable(newsHeadline));
+        waitUntilElementIsClickable(newsHeadline);
         Actions action = new Actions(driver);
         action.moveToElement(newsHeadline).click().perform();
     }
@@ -96,9 +104,11 @@ public class verifyNewsPage {
     }
 
     public void clickGoogleSearchBtn() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(clickSearchBtn));
-        Actions action = new Actions(driver);
-        action.moveToElement(clickSearchBtn).click().perform();
+       waitUntilElementIsClickable(clickSearchBtn);
+//        Actions action = new Actions(driver);
+//        action.moveToElement(clickSearchBtn).click().perform();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", clickSearchBtn);
+
     }
 
     public void saveTextToFile() {
@@ -132,5 +142,10 @@ public class verifyNewsPage {
 
         return result.size() >= count ? true : false;
 
+    }
+
+    @Override
+    protected ExpectedCondition getPageLoadCondition() {
+        return ExpectedConditions.visibilityOf(newsButton);
     }
 }
