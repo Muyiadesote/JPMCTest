@@ -1,23 +1,22 @@
 package com.Jpmc.Step_definition;
 
-import com.Jpmc.BasePage;
+import com.Jpmc.extent_listeners.ExtentManager;
+import com.Jpmc.extent_listeners.ExtentTestManager;
 import com.Jpmc.verifyNewsPage;
+import com.aventstack.extentreports.Status;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.*;
-import org.junit.Assert;
-import java.util.ResourceBundle;
+import org.testng.Assert;
 
 
 public class verifyNewsTest extends BaseSteps {
 
-    public verifyNewsPage verify;
-
+    public verifyNewsPage verifyNP;
     protected Scenario scenario;
     static String scenarioName;
     static int x = 0;
-
     @Before
     public synchronized void  before(Scenario scenario) {
 
@@ -32,68 +31,77 @@ public class verifyNewsTest extends BaseSteps {
         x = x + 1;
         this.scenario = scenario;
         scenarioName = scenario.getName();
-
+        ExtentTestManager.startTest("Scenario No : " + x + " : " + scenario.getName());
+        ExtentTestManager.getTest().log(Status.INFO, "Scenario started : - " + scenario.getName());
         setUpFramework();
     }
 
     @After
     public void after(Scenario scenario) {
 
+        if (scenario.isFailed()) {
+
+            ExtentTestManager.logFail("Scenario Failed");
+            ExtentTestManager.addScreenShotsOnFailure();
+        } else {
+
+            ExtentTestManager.scenarioPass();
+        }
+
+        ExtentManager.getReporter().flush();
+
         quit();
 
     }
 
 
-    @Given("^I navigate to the guardian news website$")
-    public void i_navigate_to_the_guardian_news_website(String browser) throws Throwable {
+    @Given("^launch browser '(.*?)'$")
+    public void launchBrowser(String browser) throws Throwable {
         openBrowser(browser);
-//        driver.get(config.getString("URL"));
+        ExtentTestManager.logInfo("Browser Opened : "+browser);
     }
 
-    @When("^I click on the news link from the menu$")
-    public void i_click_on_the_news_link_from_the_menu(String URL) throws Throwable {
-        verify = new verifyNewsPage().open(URL);
-//        verifyNP.clickCookie();
-//        verifyNP.clickNews();
+    @When("^User navigate to the URL '(.*?)'$")
+    public void userNavigateToTheURL(String URL)throws Throwable {
+        verifyNP = new verifyNewsPage().open(URL);
     }
 
-    @When("^I select the headlines news$")
-    public void i_select_the_headlines_news() throws Throwable {
-//        verifyNP.clickHeadlineNews();
+    @And("^User click on the news link from the menu$")
+    public void userClickOnTheNewsLinkFromTheMenu()throws Throwable {
+        verifyNP.clickCookie();
+        verifyNP.clickNews();
     }
 
-    @Then("^I should be able to see the news page of that headline$")
-    public void i_should_be_able_to_see_the_news_page_of_that_headline() throws Throwable {
-        //verifyNP.closeGuardianSupport();
-//        System.out.println(verifyNP.getHeadline());
+    @And("^User select the headlines news$")
+    public void userSelectTheHeadlinesNews() throws Throwable{
+        verifyNP.clickHeadlineNews();
     }
 
-    @Then("^I should be able to copy and save to file the headline of the news$")
-    public void i_should_be_able_to_copy_and_save_to_file_the_headline_of_the_news() throws Throwable {
-//        verifyNP.saveTextToFile();
+    @Then("^User should be able to see the news page of that headline$")
+    public void userShouldBeAbleToSeeTheNewsPageOfThatHeadline() throws Throwable{
+//        verifyNP.closeGuardianSupport();
+        System.out.println(verifyNP.getHeadline());
     }
 
-    @Given("^I navigate to google website$")
-    public void i_navigate_to_google_website() throws Throwable {
-//        driver.get(config.getString("URL2"));
-
+    @And("^User should be able to copy and save to file the headline of the news$")
+    public void userShouldBeAbleToCopyAndSaveToFileTheHeadlineOfTheNews() throws Throwable{
+        verifyNP.saveTextToFile();
     }
 
-    @When("^I search for the headline news from the guardian site$")
-    public void i_search_for_the_headline_news_from_the_guardian_site() throws Throwable {
-//        verifyNP.enterGoogleText();
-
+    @And("^User search for the headline news from the guardian site$")
+    public void userSearchForTheHeadlineNewsFromTheGuardianSite() throws Throwable{
+        verifyNP.enterGoogleText();
     }
 
-    @Then("^I should see a list of other sources with similar news details$")
-    public void i_should_see_a_list_of_other_sources_with_similar_news_details() throws Throwable {
-//        verifyNP.clickGoogleSearchBtn();
+    @Then("^User should see a list of other sources with similar news details$")
+    public void userShouldSeeAListOfOtherSourcesWithSimilarNewsDetails() throws Throwable{
+        verifyNP.clickGoogleSearchBtn();
     }
 
-    @Then("^I am able to confirm that the news article Fake or not$")
-    public void i_am_able_to_confirm_that_the_news_article_Fake_or_not() throws Throwable {
-//        Assert.assertTrue(verifyNP.isResultCountAtLeast(5));
-//        System.out.println(verifyNP.isResultCountAtLeast(5));
+    @And("^User am able to confirm that the news article Fake or not$")
+    public void userAmAbleToConfirmThatTheNewsArticleFakeOrNot() throws Throwable{
+        Assert.assertTrue(verifyNP.isResultCountAtLeast(5));
+        System.out.println(verifyNP.isResultCountAtLeast(5));
     }
 
 

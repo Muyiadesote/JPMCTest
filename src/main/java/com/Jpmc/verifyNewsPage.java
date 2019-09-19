@@ -51,6 +51,9 @@ public class verifyNewsPage extends BasePage {
     @FindAll(@FindBy(xpath = "//h3"))   //id = "resultStats"
     private List <WebElement> result;
 
+    @FindBy(xpath = "//body")
+    private WebElement pageReady;
+
     public verifyNewsPage open(String url) {
 
         DriverManager.getDriver().navigate().to(url);
@@ -104,7 +107,7 @@ public class verifyNewsPage extends BasePage {
     }
 
     public void clickGoogleSearchBtn() {
-       waitUntilElementIsClickable(clickSearchBtn);
+        waitUntilElementIsClickable(clickSearchBtn);
 //        Actions action = new Actions(driver);
 //        action.moveToElement(clickSearchBtn).click().perform();
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", clickSearchBtn);
@@ -146,6 +149,6 @@ public class verifyNewsPage extends BasePage {
 
     @Override
     protected ExpectedCondition getPageLoadCondition() {
-        return ExpectedConditions.visibilityOf(newsButton);
+        return ExpectedConditions.visibilityOf(pageReady);
     }
 }

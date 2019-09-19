@@ -45,17 +45,17 @@ public class BaseSteps {
         if (System.getProperty("os.name").equalsIgnoreCase("mac")) {
 
             DriverFactory.setChromeDriverExePath(
-                    System.getProperty("user.dir") + "//src//test//resources//executables//chromedriver");
+                    System.getProperty("user.dir") + "//src//test//resources//executables//chromedriverMac_76.0");
             DriverFactory.setGeckoDriverExePath(
-                    System.getProperty("user.dir") + "//src//test//resources//executables//geckodriver");
+                    System.getProperty("user.dir") + "//src//test//resources//executables//geckodriverMac_0.25");
 
         }else {
 
 
             DriverFactory.setChromeDriverExePath(
-                    System.getProperty("user.dir") + "//src//test//resources//executables//chromedriver.exe");
+                    System.getProperty("user.dir") + "//src//test//resources//grid//chromedriverWin_76.0.exe");
             DriverFactory.setGeckoDriverExePath(
-                    System.getProperty("user.dir") + "//src//test//resources//executables//geckodriver.exe");
+                    System.getProperty("user.dir") + "//src//test//resources//grid//geckodriverWin_0.25.exe");
         }
 		/*
 		 * Initialize properties Initialize logs load executables
