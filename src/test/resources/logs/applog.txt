@@ -1,5 +1,4 @@
-INFO    2019-09-20 00:48:04,655 [pool-1-thread-2] com.Jpmc.Step_definition.BaseSteps  - Config properties file loaded
-INFO    2019-09-20 00:48:10,280 [pool-1-thread-1] com.Jpmc.Step_definition.BaseSteps  - Driver Initialized !!!
-INFO    2019-09-20 00:48:17,813 [pool-1-thread-2] com.Jpmc.Step_definition.BaseSteps  - Driver Initialized !!!
-INFO    2019-09-20 00:48:32,390 [pool-1-thread-1] com.Jpmc.Step_definition.BaseSteps  - Test Execution Completed !!!
-INFO    2019-09-20 00:48:35,313 [pool-1-thread-2] com.Jpmc.Step_definition.BaseSteps  - Test Execution Completed !!!
+INFO    2019-09-22 14:12:59,377 [pool-1-thread-2] com.Jpmc.Step_definition.BaseSteps  - Config properties file loaded
+INFO    2019-09-22 14:13:08,325 [pool-1-thread-2] com.Jpmc.Step_definition.BaseSteps  - Driver Initialized !!!
+INFO    2019-09-22 14:13:12,921 [pool-1-thread-1] com.Jpmc.Step_definition.BaseSteps  - Test Execution Completed !!!
+INFO    2019-09-22 14:13:29,190 [pool-1-thread-2] com.Jpmc.Step_definition.BaseSteps  - Test Execution Completed !!!

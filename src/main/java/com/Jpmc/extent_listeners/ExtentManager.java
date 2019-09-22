@@ -3,7 +3,7 @@ package com.Jpmc.extent_listeners;
 import com.Jpmc.DriverManager;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import com.aventstack.extentreports.reporter.configuration.ChartLocation;
+
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -27,8 +27,8 @@ public class ExtentManager {
 
             ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir")+"/reports/"+fileName);
 
-            htmlReporter.config().setTestViewChartLocation(ChartLocation.BOTTOM);
-            htmlReporter.config().setChartVisibilityOnOpen(true);
+//            htmlReporter.config().setTestViewChartLocation(ChartLocation.BOTTOM);
+//            htmlReporter.config().setChartVisibilityOnOpen(true);
             htmlReporter.config().setTheme(Theme.STANDARD);
             htmlReporter.config().setDocumentTitle(fileName);
             htmlReporter.config().setEncoding("utf-8");

@@ -1,0 +1,2 @@
+INFO    2019-09-22 14:00:29,723 [pool-1-thread-1] com.Jpmc.Step_definition.BaseSteps  - Config properties file loaded
+INFO    2019-09-22 14:00:29,726 [pool-1-thread-2] com.Jpmc.Step_definition.BaseSteps  - Config properties file loaded
