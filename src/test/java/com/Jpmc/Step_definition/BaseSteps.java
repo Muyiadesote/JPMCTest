@@ -13,8 +13,8 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import com.Jpmc.DriverFactory;
-import com.Jpmc.DriverManager;
+import com.Jpmc.utils.DriverFactory;
+import com.Jpmc.utils.DriverManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.Platform;
@@ -31,7 +31,7 @@ public class BaseSteps {
     private Properties Config = new Properties();
     private FileInputStream fis;
     public Logger log = Logger.getLogger(BaseSteps.class);
-    public boolean grid=true;
+    public boolean grid=false; // this needs to be set to false if not running on GRID - run with Testrunner & not Grid
 
 
     public void setUpFramework() {
@@ -42,20 +42,12 @@ public class BaseSteps {
                 System.getProperty("user.dir") + "//src//test//resources//properties//Config.properties");
 
 
-        if (System.getProperty("os.name").equalsIgnoreCase("mac")) {
+        if (System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) { // pls replace the "Mac OS X" with Mac PC's OS i.e. "Mac OS X"
 
             DriverFactory.setChromeDriverExePath(
                     System.getProperty("user.dir") + "//src//test//resources//executables//chromedriverMac_76.0");
             DriverFactory.setGeckoDriverExePath(
                     System.getProperty("user.dir") + "//src//test//resources//executables//geckodriverMac_0.25");
-
-//        }
-//        else if(System.getProperty("os.name").equalsIgnoreCase("windows 10")) {
-//
-//            DriverFactory.setChromeDriverExePath(
-//                    System.getProperty("user.dir") + "//src//test//resources//executables//chromedriverWin_76.0.exe");
-//            DriverFactory.setGeckoDriverExePath(
-//                    System.getProperty("user.dir") + "//src//test//resources//executables//geckodriverWin_0.25.exe");
 
         }else {
 
@@ -101,7 +93,7 @@ public class BaseSteps {
 
         if(System.getenv("ExecutionType")!=null && System.getenv("ExecutionType").equals("Grid")) {
 
-            grid=true;
+            grid=false;  // this needs to be set to false if not running on GRID - run with Testrunner & not Grid
         }
 
 

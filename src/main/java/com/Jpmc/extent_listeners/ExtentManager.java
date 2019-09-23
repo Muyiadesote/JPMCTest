@@ -1,6 +1,6 @@
 package com.Jpmc.extent_listeners;
 
-import com.Jpmc.DriverManager;
+import com.Jpmc.utils.DriverManager;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 

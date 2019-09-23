@@ -1,10 +1,12 @@
-package com.Jpmc;
+package com.Jpmc.pageClass;
 
+import com.Jpmc.utils.BasePage;
+import com.Jpmc.utils.DriverManager;
+import com.Jpmc.utils.FileWriter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -110,7 +112,7 @@ public class verifyNewsPage extends BasePage {
         waitUntilElementIsClickable(clickSearchBtn);
 //        Actions action = new Actions(driver);
 //        action.moveToElement(clickSearchBtn).click().perform();
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", clickSearchBtn);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", clickSearchBtn); // this is to click on the Search button
 
     }
 

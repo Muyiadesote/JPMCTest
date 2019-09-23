@@ -2,7 +2,7 @@ package com.Jpmc.Step_definition;
 
 import com.Jpmc.extent_listeners.ExtentManager;
 import com.Jpmc.extent_listeners.ExtentTestManager;
-import com.Jpmc.verifyNewsPage;
+import com.Jpmc.pageClass.verifyNewsPage;
 import com.aventstack.extentreports.Status;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;

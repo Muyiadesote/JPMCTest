@@ -1,4 +1,4 @@
-package com.Jpmc;
+package com.Jpmc.utils;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
